@@ -361,7 +361,7 @@ def train(model, device, config, epochs=5, batch_size=1, save_cp=True, log_step=
     save_prefix = 'Yolov4_epoch'
     saved_models = deque()
     model.train()
-    for epoch in range(epochs):
+    for epoch in range(config.start_epoch, epochs):
         # model.train()
         epoch_loss = 0
         epoch_step = 0
@@ -555,6 +555,7 @@ def get_args(**kwargs):
         help='maximum number of checkpoints to keep. If set 0, all checkpoints will be kept',
         dest='keep_checkpoint_max')
     parser.add_argument('-checkpoints', dest='checkpoints', type=str, default='checkpoints', help="checkpoints path")
+    parser.add_argument('-start_epoch', dest='start_epoch', type=int, default=0, help="start epoch. only relevant if you want to continue training and want to start with the last saved epoch index.")
     args = vars(parser.parse_args())
 
     # for k in args.keys():
