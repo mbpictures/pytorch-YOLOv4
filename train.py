@@ -554,6 +554,7 @@ def get_args(**kwargs):
         '-keep-checkpoint-max', type=int, default=10,
         help='maximum number of checkpoints to keep. If set 0, all checkpoints will be kept',
         dest='keep_checkpoint_max')
+    parser.add_argument('-checkpoints', dest='checkpoints', type=str, default='checkpoints', help="checkpoints path")
     args = vars(parser.parse_args())
 
     # for k in args.keys():
