@@ -19,6 +19,7 @@ import numpy as np
 
 import torch
 from torch.utils.data.dataset import Dataset
+import re
 
 
 def rand_uniform_strong(min, max):
@@ -417,17 +418,18 @@ def get_image_id(filename:str) -> int:
     in which case this function is unnecessary.
     For creating one's own `get_image_id` function, one can refer to
     https://github.com/google/automl/blob/master/efficientdet/dataset/create_pascal_tfrecord.py#L86
-    or refer to the following code (where the filenames are like 'level1_123.jpg')
-    >>> lv, no = os.path.splitext(os.path.basename(filename))[0].split("_")
-    >>> lv = lv.replace("level", "")
-    >>> no = f"{int(no):04d}"
-    >>> return int(lv+no)
+    or refer to the following code (where the filenames are like '01_Level_Test_IMG_01_04___0.5__9000__2800.jpg')
+    >>> numbers = re.findall(r'\d+', filename)
+    >>> out = ""
+    >>> for n in numbers:
+    >>>     out += str(int(n))
+    >>> return int(out)
     """
-    raise NotImplementedError("Create your own 'get_image_id' function")
-    lv, no = os.path.splitext(os.path.basename(filename))[0].split("_")
-    lv = lv.replace("level", "")
-    no = f"{int(no):04d}"
-    return int(lv+no)
+    numbers = re.findall(r'\d+', filename)
+    out = ""
+    for n in numbers:
+        out += str(int(n)) # filter leading zeros
+    return int(out)
 
 
 if __name__ == "__main__":
