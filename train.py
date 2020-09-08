@@ -556,6 +556,7 @@ def get_args(**kwargs):
         dest='keep_checkpoint_max')
     parser.add_argument('-checkpoints', dest='checkpoints', type=str, default='checkpoints', help="checkpoints path")
     parser.add_argument('-start_epoch', dest='start_epoch', type=int, default=0, help="start epoch. only relevant if you want to continue training and want to start with the last saved epoch index.")
+    parser.add_argument('-epochs', dest='TRAIN_EPOCHS', type=int, default=50, help="number of epochs to train")
     args = vars(parser.parse_args())
 
     # for k in args.keys():
