@@ -425,10 +425,12 @@ def get_image_id(filename:str) -> int:
     >>>     out += str(int(n))
     >>> return int(out)
     """
+    split = filename.split(".")
+    out = str(int(split[0].replace("_jpg", "")))
     numbers = re.findall(r'\d+', filename)
-    out = ""
     for n in numbers:
-        out += str(int(n)) # filter leading zeros
+        if len(out) >= 9: break
+        out += str(int(n))
     return int(out)
 
 
