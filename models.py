@@ -466,7 +466,7 @@ if __name__ == "__main__":
         imgfile = sys.argv[3]
         height = sys.argv[4]
         width = int(sys.argv[5])
-        namesfile = int(sys.argv[6])
+        namesfile = sys.argv[6]
     else:
         print('Usage: ')
         print('  python models.py num_classes weightfile imgfile namefile')
@@ -487,7 +487,7 @@ if __name__ == "__main__":
     # Optional inference sizes:
     #   Hight in {320, 416, 512, 608, ... 320 + 96 * n}
     #   Width in {320, 416, 512, 608, ... 320 + 96 * m}
-    sized = cv2.resize(img, (width, height))
+    sized = cv2.resize(img, (int(width), int(height)))
     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
     from tool.utils import load_class_names, plot_boxes_cv2
